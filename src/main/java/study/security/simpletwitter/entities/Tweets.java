@@ -3,7 +3,8 @@ package study.security.simpletwitter.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.Instant;
 
@@ -19,10 +20,10 @@ public class Tweets {
     @JoinColumn(name = "user_id")
     private User user;
     private String content;
-    @CreationTimestamp
+    @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
-    @CreationTimestamp
+    @LastModifiedDate
     @Column(name = "updated_at")
     private Instant updatedAt;
 }
