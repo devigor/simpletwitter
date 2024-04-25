@@ -4,26 +4,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import study.security.simpletwitter.dto.LoginRequestDTO;
 import study.security.simpletwitter.dto.LoginResponseDTO;
 import study.security.simpletwitter.infra.security.Jwt;
-import study.security.simpletwitter.repositories.UserRepository;
 import study.security.simpletwitter.services.auth.AuthService;
 
 import java.time.Instant;
 
 @RestController
+@RequestMapping("/api/auth")
 public class AuthController {
     private final AuthService authService;
     private final Jwt jwtInfra;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public AuthController(AuthService authService, BCryptPasswordEncoder bCryptPasswordEncoder, UserRepository userRepository, Jwt jwtInfra, JwtEncoder jwtEncoder) {
+    public AuthController(AuthService authService, BCryptPasswordEncoder bCryptPasswordEncoder, Jwt jwtInfra) {
         this.authService = authService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jwtInfra = jwtInfra;

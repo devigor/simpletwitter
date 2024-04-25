@@ -36,7 +36,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
       httpSecurity
               .authorizeHttpRequests(authorize -> authorize
-                      .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                      .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
                       .anyRequest().authenticated())
               .csrf(csrf -> csrf.disable())
               .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
