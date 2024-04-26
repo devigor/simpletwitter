@@ -5,7 +5,8 @@ import study.security.simpletwitter.dto.CreateTweetDTO;
 import study.security.simpletwitter.entities.Tweets;
 import study.security.simpletwitter.entities.User;
 import study.security.simpletwitter.repositories.TweetsRepository;
-import study.security.simpletwitter.services.user.UserService;
+
+import java.util.Optional;
 
 @Service
 public class TweetsServiceImpl implements TweetsService {
@@ -23,5 +24,15 @@ public class TweetsServiceImpl implements TweetsService {
         tweet.setContent(createTweeterDTO.content());
 
         return tweetsRepository.save(tweet);
+    }
+
+    @Override
+    public Tweets findTweetById(Long tweetId) {
+        return tweetsRepository.findById(tweetId).orElseThrow();
+    }
+
+    @Override
+    public void deleteTweetById(Long tweetId) {
+        tweetsRepository.deleteById(tweetId);
     }
 }
