@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface UserService {
     Optional<User> findByUsername(String username);
+    User findUserById(Long id);
     void createUser(RegisterRequestDTO registerRequestDTO, Role basicRole);
     List<User> findAllUsers();
 }

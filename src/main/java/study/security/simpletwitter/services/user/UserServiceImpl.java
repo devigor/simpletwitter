@@ -27,6 +27,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow();
+    }
+
+    @Override
     public void createUser(RegisterRequestDTO registerRequestDTO, Role basicRole) {
         User newUser = new User();
         newUser.setUsername(registerRequestDTO.username());
