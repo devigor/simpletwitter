@@ -7,6 +7,7 @@ import study.security.simpletwitter.entities.Role;
 import study.security.simpletwitter.entities.User;
 import study.security.simpletwitter.repositories.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,13 +27,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUser(RegisterRequestDTO registerRequestDTO, Role basicRole) {
+    public void createUser(RegisterRequestDTO registerRequestDTO, Role basicRole) {
         User newUser = new User();
         newUser.setUsername(registerRequestDTO.username());
         newUser.setPassword(bCryptPasswordEncoder.encode(registerRequestDTO.password()));
         newUser.setRoles(Set.of(basicRole));
 
         userRepository.save(newUser);
-        return newUser;
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 }

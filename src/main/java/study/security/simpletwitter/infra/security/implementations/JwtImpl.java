@@ -16,13 +16,14 @@ public class JwtImpl implements Jwt {
         this.jwtEncoder = jwtEncoder;
     }
 
-    public JwtClaimsSet createJwtClaims(String issuer, String subject, Instant issuedAt, Instant expiresAt) {
+    public JwtClaimsSet createJwtClaims(String issuer, String subject, Instant issuedAt, Instant expiresAt, String scope) {
         return JwtClaimsSet
                 .builder()
                 .issuer(issuer)
                 .subject(subject)
                 .issuedAt(issuedAt)
                 .expiresAt(expiresAt)
+                .claim("scope", scope)
                 .build();
     }
 

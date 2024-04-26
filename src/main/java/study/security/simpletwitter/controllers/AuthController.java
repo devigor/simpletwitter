@@ -19,6 +19,7 @@ import study.security.simpletwitter.services.roles.RoleService;
 import study.security.simpletwitter.services.user.UserService;
 
 import java.time.Instant;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -48,11 +49,17 @@ public class AuthController {
         Instant nowDate = Instant.now();
         Instant expiresAt = nowDate.plusSeconds(expiresTime);
 
+        String scopes = user.get().getRoles()
+                .stream()
+                .map(Role::getName)
+                .collect(Collectors.joining(" "));
+
         JwtClaimsSet claims = jwtInfra.createJwtClaims(
                 "minitwitter-spring",
                 user.get().getId().toString(),
                 nowDate,
-                expiresAt
+                expiresAt,
+                scopes
         );
         String jwtValue = jwtInfra.encodeJwt(claims);
 
