@@ -1,5 +1,6 @@
 package study.security.simpletwitter.infra.security.implementations;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -9,12 +10,9 @@ import study.security.simpletwitter.infra.security.Jwt;
 import java.time.Instant;
 
 @Configuration
+@AllArgsConstructor
 public class JwtImpl implements Jwt {
     private final JwtEncoder jwtEncoder;
-
-    public JwtImpl(JwtEncoder jwtEncoder) {
-        this.jwtEncoder = jwtEncoder;
-    }
 
     public JwtClaimsSet createJwtClaims(String issuer, String subject, Instant issuedAt, Instant expiresAt, String scope) {
         return JwtClaimsSet

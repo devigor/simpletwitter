@@ -1,5 +1,6 @@
 package study.security.simpletwitter.services.tweets;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import study.security.simpletwitter.dto.CreateTweetDTO;
 import study.security.simpletwitter.entities.Tweets;
@@ -9,13 +10,9 @@ import study.security.simpletwitter.repositories.TweetsRepository;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class TweetsServiceImpl implements TweetsService {
     private final TweetsRepository tweetsRepository;
-
-    public TweetsServiceImpl(TweetsRepository tweetsRepository) {
-        this.tweetsRepository = tweetsRepository;
-    }
-
 
     @Override
     public Tweets createTweet(CreateTweetDTO createTweeterDTO, User user) {

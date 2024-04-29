@@ -1,6 +1,7 @@
 package study.security.simpletwitter.controllers;
 
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,18 +24,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class AuthController {
     private final UserService userService;
     private final RoleService roleService;
     private final Jwt jwtInfra;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public AuthController(UserService userService, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder, Jwt jwtInfra) {
-        this.userService = userService;
-        this.roleService = roleService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.jwtInfra = jwtInfra;
-    }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {

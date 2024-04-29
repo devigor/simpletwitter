@@ -2,9 +2,13 @@ package study.security.simpletwitter.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "roles")
+@Getter
+@Setter
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,35 +16,16 @@ public class Role {
     private Long id;
     private String name;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
+    @Getter
     public enum ROLES_VALUES {
         ADMIN(1L),
         BASIC(2L);
 
 
-        long roleId;
+        final long roleId;
 
         ROLES_VALUES(long roleId) {
             this.roleId = roleId;
-        }
-
-        public long getRoleId() {
-            return roleId;
         }
     }
 }

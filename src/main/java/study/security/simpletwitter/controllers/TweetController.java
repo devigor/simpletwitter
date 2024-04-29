@@ -1,5 +1,6 @@
 package study.security.simpletwitter.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -13,14 +14,10 @@ import study.security.simpletwitter.services.user.UserService;
 
 @RestController
 @RequestMapping("/api/tweets")
+@AllArgsConstructor
 public class TweetController {
     private final UserService userService;
     private final TweetsService tweetsService;
-
-    public TweetController(UserService userService, TweetsService tweetsService) {
-        this.userService = userService;
-        this.tweetsService = tweetsService;
-    }
 
     @PostMapping("")
     public ResponseEntity<Tweets> createNewTweet(@RequestBody CreateTweetDTO createTweetDTO, JwtAuthenticationToken token) {
