@@ -9,9 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import study.security.simpletwitter.dto.LoginRequestDTO;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Set;
-
 
 @Entity
 @Table(name = "users")

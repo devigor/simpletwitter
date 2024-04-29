@@ -7,8 +7,6 @@ import study.security.simpletwitter.entities.Tweets;
 import study.security.simpletwitter.entities.User;
 import study.security.simpletwitter.repositories.TweetsRepository;
 
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class TweetsServiceImpl implements TweetsService {
