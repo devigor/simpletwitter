@@ -1,4 +1,4 @@
-package study.security.simpletwitter.entities;
+package study.security.simpletwitter.entities.Tweet;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import study.security.simpletwitter.entities.User.User;
 
 import java.sql.Timestamp;
 

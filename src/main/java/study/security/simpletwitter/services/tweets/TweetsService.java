@@ -1,10 +1,8 @@
 package study.security.simpletwitter.services.tweets;
 
-import study.security.simpletwitter.dto.CreateTweetDTO;
-import study.security.simpletwitter.entities.Tweets;
-import study.security.simpletwitter.entities.User;
-
-import java.util.Optional;
+import study.security.simpletwitter.entities.Tweet.DTOs.CreateTweetDTO;
+import study.security.simpletwitter.entities.Tweet.Tweets;
+import study.security.simpletwitter.entities.User.User;
 
 public interface TweetsService {
     Tweets createTweet(CreateTweetDTO createTweeterDTO, User user);

@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-import study.security.simpletwitter.dto.CreateTweetDTO;
-import study.security.simpletwitter.entities.Tweets;
-import study.security.simpletwitter.entities.User;
+import study.security.simpletwitter.entities.Tweet.DTOs.CreateTweetDTO;
+import study.security.simpletwitter.entities.Tweet.Tweets;
+import study.security.simpletwitter.entities.User.User;
 import study.security.simpletwitter.services.tweets.TweetsService;
 import study.security.simpletwitter.services.user.UserService;
 

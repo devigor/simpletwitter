@@ -1,4 +1,4 @@
-package study.security.simpletwitter.entities;
+package study.security.simpletwitter.entities.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import study.security.simpletwitter.dto.LoginRequestDTO;
+import study.security.simpletwitter.entities.User.DTOs.LoginRequestDTO;
+import study.security.simpletwitter.entities.Role.Role;
 
 import java.sql.Timestamp;
 import java.util.Set;

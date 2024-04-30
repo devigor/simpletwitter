@@ -3,9 +3,9 @@ package study.security.simpletwitter.services.user;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import study.security.simpletwitter.dto.RegisterRequestDTO;
-import study.security.simpletwitter.entities.Role;
-import study.security.simpletwitter.entities.User;
+import study.security.simpletwitter.entities.User.DTOs.RegisterRequestDTO;
+import study.security.simpletwitter.entities.Role.Role;
+import study.security.simpletwitter.entities.User.User;
 import study.security.simpletwitter.repositories.UserRepository;
 
 import java.util.List;

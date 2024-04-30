@@ -1,4 +1,4 @@
-package study.security.simpletwitter.entities;
+package study.security.simpletwitter.entities.Role;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
