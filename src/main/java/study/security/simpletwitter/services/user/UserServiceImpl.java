@@ -10,7 +10,6 @@ import study.security.simpletwitter.entities.User.exceptions.UserNotFoundExcepti
 import study.security.simpletwitter.repositories.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service

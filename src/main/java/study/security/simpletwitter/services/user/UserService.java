@@ -5,7 +5,6 @@ import study.security.simpletwitter.entities.Role.Role;
 import study.security.simpletwitter.entities.User.User;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
     User findByUsername(String username);
