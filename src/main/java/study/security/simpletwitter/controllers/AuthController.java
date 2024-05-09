@@ -1,6 +1,7 @@
 package study.security.simpletwitter.controllers;
 
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import study.security.simpletwitter.entities.User.DTOs.LoginRequestDTO;
 import study.security.simpletwitter.entities.User.DTOs.LoginResponseDTO;
 import study.security.simpletwitter.entities.User.DTOs.RegisterRequestDTO;
 import study.security.simpletwitter.entities.Role.Role;
+import study.security.simpletwitter.entities.User.exceptions.UserBadCredentialsException;
 import study.security.simpletwitter.infra.security.Jwt;
 import study.security.simpletwitter.services.roles.RoleService;
 import study.security.simpletwitter.services.user.UserService;
@@ -32,26 +34,26 @@ public class AuthController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
         String username = loginRequestDTO.username();
         var user = userService.findByUsername(username);
 
-        if (user.isEmpty() || !user.get().isLoginCorrect(loginRequestDTO, bCryptPasswordEncoder)) {
-            throw new BadCredentialsException("Username or password invalid");
+        if (!user.isLoginCorrect(loginRequestDTO, bCryptPasswordEncoder)) {
+            throw new UserBadCredentialsException();
         }
 
         long expiresTime = 300L;
         Instant nowDate = Instant.now();
         Instant expiresAt = nowDate.plusSeconds(expiresTime);
 
-        String scopes = user.get().getRoles()
+        String scopes = user.getRoles()
                 .stream()
                 .map(Role::getName)
                 .collect(Collectors.joining(" "));
 
         JwtClaimsSet claims = jwtInfra.createJwtClaims(
                 "minitwitter-spring",
-                user.get().getId().toString(),
+                user.getId().toString(),
                 nowDate,
                 expiresAt,
                 scopes
@@ -63,13 +65,9 @@ public class AuthController {
 
     @Transactional
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
+    public ResponseEntity<Void> register(@Valid @RequestBody RegisterRequestDTO registerRequestDTO) {
         var basicRole = roleService.findRoleByName(Role.ROLES_VALUES.BASIC.name());
-        var userFromDb = userService.findByUsername(registerRequestDTO.username());
-
-        if (userFromDb.isPresent()) {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
-        }
+        userService.findByUsername(registerRequestDTO.username());
 
         userService.createUser(registerRequestDTO, basicRole);
 

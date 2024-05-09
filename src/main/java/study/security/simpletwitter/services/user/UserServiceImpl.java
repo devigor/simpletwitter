@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import study.security.simpletwitter.entities.User.DTOs.RegisterRequestDTO;
 import study.security.simpletwitter.entities.Role.Role;
 import study.security.simpletwitter.entities.User.User;
+import study.security.simpletwitter.entities.User.exceptions.UserNotFoundException;
 import study.security.simpletwitter.repositories.UserRepository;
 
 import java.util.List;
@@ -19,13 +20,13 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
     public User findUserById(Long id) {
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     @Override
